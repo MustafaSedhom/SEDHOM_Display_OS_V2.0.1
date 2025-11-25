@@ -924,8 +924,65 @@ int Screen_width()
 {
     return(Display.width());
 }
+void ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_color,Color_t font_color,
+    Color_t image_background,bool default_image,bool eye,bool prof,
+    char* name,char* unversity,char* department_1,char* department_2,char* Born,char* number,
+     void (*OnTap)())
+{
+    #define x1   x
+    #define y1   y
+
+    #define h1    270
+    #define w1    200
+
+    Color_t color_id =0;
+    if(color == WHITE) color_id = BLACK;
+    else if(color == BLACK) color_id = WHITE;
+    else  color_id = color;
+    Container(x1-3,y1-3,h1+6,w1+6,20,color_id,OnTap);
+    Container(x1,y1,h1,w1,20,color,OnTap);
+    Text(((prof)?x1+60:x1+80),y1+20,BigFont,main_font_color,((prof)?"PROFESSER":"STUDENT"));
+    Divider_vertical(x1+10,y1+35,h1-20,3,main_font_color);
+    Text(x1+30,y1+55,SmallFont,font_color,"IDENTITY CARD");
+
+    Text(x1+10,y1+70,SmallFont,main_font_color,((prof)?"Dr Name":"Nmae"));
+    Text(x1+10,y1+85,SmallFont,font_color,name);
+
+    Text(x1+10,y1+100,SmallFont,main_font_color,((prof)?"Unversity":"Stadies at"));
+    Text(x1+10,y1+115,SmallFont,font_color,unversity);
+
+    Text(x1+10,y1+130,SmallFont,main_font_color,"Department");
+    Text(x1+10,y1+145,SmallFont,font_color,department_1);
+    Text(x1+10,y1+160,SmallFont,font_color,department_2);
+
+    Text(x1+10,y1+175,SmallFont,main_font_color,"Born");
+    Text(x1+10,y1+190,SmallFont,font_color,Born);
+
+    Container(x1+160,y1+45,100,110,0,image_background,OnTap);
+    
+    if(default_image)
+    {
+        fill_Circle(x1+210,y1+160,40,DARKGREY);
+        fill_Circle(x1+210,y1+100,25,DARKGREY);
+        if(eye)
+        {
+            fill_Circle(x1+220,y1+97,7,BLACK);
+            fill_Circle(x1+220,y1+97,5,DARKGREY);
+            fill_Circle(x1+220,y1+97,1,BLACK);//eye
+            Divider_vertical(x1+205,y1+97,10,2,BLACK);
+            fill_Circle(x1+200,y1+97,7,BLACK);
+            fill_Circle(x1+200,y1+97,5,DARKGREY);
+            fill_Circle(x1+200,y1+97,1,BLACK);//eye
+            Divider_vertical(x1+225,y1+97,10,2,BLACK);
+            Divider_vertical(x1+185,y1+97,10,2,BLACK);
+        }
 
 
+    }
+    
+    fill_Round_Rect(x1+150,y1+155,120,45,15,color);
+    Text(x1+157,y1+175,SmallFont,font_color,number);
+}
 
 
 
